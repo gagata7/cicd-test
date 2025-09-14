@@ -1,0 +1,22 @@
+name: testowanie czy program w cpp dziala
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+            
+            - name: Install dependencies
+              run: sudo apt-get update && sudo apt-get install -y g++
+
+            - name: Build project
+              run: g++ -o app src/task.cpp 
+
+            - name: Build and run tests
+              run: g++ -o tests tests/test_task.cpp && ./tests
